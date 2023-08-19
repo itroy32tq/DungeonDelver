@@ -11,6 +11,7 @@ namespace Dalver
         static public Sprite[] SPRITES;
         static public Transform TILE_ANCHOR;
         static public Tile[,] TILES;
+        static public string COLLISIONS;
 
         [Header("Set in Inspector")]
         public TextAsset mapData;
@@ -20,8 +21,11 @@ namespace Dalver
 
         private void Awake()
         {
+            COLLISIONS = Utils.RemoveLineEndings(mapCollisions.text);
             LoadMap();
+            
         }
+
         public void LoadMap() 
         {
             GameObject go = new GameObject("TILE_ANCHOR");
@@ -46,6 +50,8 @@ namespace Dalver
             }
             print("Parsed " + SPRITES.Length + " spries.");
             print("Map size: " + W + " wide by " + H + " high");
+
+            ShowMap();
         }
 
         static public int GET_MAP(int x, int y)
@@ -65,6 +71,30 @@ namespace Dalver
         {
             if (x < 0 || x >= W || y < 0 || y >= H) return;
             MAP[x, y] = tNum;
+        }
+
+        /// <summary>
+        /// Генерация всей карты
+        /// </summary>
+        private void ShowMap()
+        {
+            TILES = new Tile[W, H];
+
+            for (int j = 0; j < H; j++)
+            {
+                for (int i = 0; i < W; i++)
+                {
+                    if (MAP[i, j] != 0)
+                    {
+                        Tile ti = Instantiate<Tile>(tilePrefab);
+                        ti.transform.SetParent(TILE_ANCHOR);
+                        Debug.Log(i+" "+j);
+                        ti.SetTile(i, j);
+                        TILES[i, j] = ti;
+
+                    }
+                }
+            }
         }
 
     }

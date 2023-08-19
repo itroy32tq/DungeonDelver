@@ -11,6 +11,10 @@ namespace Dalver
         public int y;
         public int tileNum;
 
+        [SerializeField]
+        private BoxCollider bColl;
+
+
         public void SetTile(int eX, int eY, int eTileNum = -1)
         {
             x = eX; y = eY;
@@ -22,7 +26,24 @@ namespace Dalver
                 
             }
             tileNum = eTileNum;
+            if (tileNum > TileCamera.SPRITES.Length) return;
             GetComponent<SpriteRenderer>().sprite = TileCamera.SPRITES[tileNum];
+            SetCollider();
+        }
+
+        private void SetCollider()
+        {
+            bColl.enabled = true;
+            char c = TileCamera.COLLISIONS[tileNum];
+            switch (c)
+            { 
+                case 'S':
+                    bColl.center = Vector3.zero; 
+                    break;
+                default:
+                    bColl.enabled = false; 
+                    break;
+            }
         }
     }
 }
