@@ -20,8 +20,8 @@ namespace Delver
 
         private void Update() 
         { 
-            transform.rotation = Quaternion.Euler(0,0,90*dray.facing);
-            sword.SetActive(dray.mode == EMode.attack);
+            transform.rotation = Quaternion.Euler(0,0,90*dray.Facing);
+            sword.SetActive(dray.Mode == EMode.attack);
         }
     }
 }

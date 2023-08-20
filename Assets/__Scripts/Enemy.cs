@@ -1,10 +1,12 @@
+using Delver;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements.Experimental;
 
 namespace Dalver
 {
-    public abstract class Enemy : MonoBehaviour
+    public abstract class Enemy : Unit, IFacingMover
     {
         protected static Vector3[] directions = new Vector3[]
             {
@@ -12,24 +14,25 @@ namespace Dalver
             };
 
         [Header("Set in Inspector: Enemy")]
-        public float maxHelth = 1;
+        [SerializeField] protected float maxHelth = 1;
 
         [Header("Set Dynamically: Enemy")]
-        public float helth = 1;
+        [SerializeField] protected float helth = 1;
 
-        protected Animator animator;
-        protected Rigidbody rigid;
         protected SpriteRenderer sRend;
+        new public bool Moving => true;
 
-        protected virtual void Awake()
+
+        protected override void Awake()
         {
-            helth = maxHelth;
-            animator = GetComponent<Animator>();
-            rigid = GetComponent<Rigidbody>();
+            base.Awake();
             sRend = GetComponent<SpriteRenderer>();
         }
 
-
+        public Vector2 GetRoomPosOnGrid(float mult = -1)
+        {
+            return InRm.GetRoomPosOnGrid();
+        }
     }
 }
 

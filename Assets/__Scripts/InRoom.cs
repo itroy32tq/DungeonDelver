@@ -13,7 +13,7 @@ namespace Delver
 
         [Header("Set in Inspector")]
         public bool keepInRoom = true;
-        public float gridMult = 1;
+        public float gridMult;
 
         public Vector2 RoomPos
         {
@@ -50,6 +50,17 @@ namespace Delver
                 rm.y *= ROOM_H;
                 transform.position = rm + rPos;
             }
+        }
+
+        public Vector2 GetRoomPosOnGrid(float mult = -1)
+        {
+            if (mult == -1) mult = gridMult;
+            Vector2 rPos = RoomPos;
+            rPos/=mult;
+            rPos.x = Mathf.Round(rPos.x);
+            rPos.y = Mathf.Round(rPos.y);
+            rPos *= mult;
+            return rPos;
         }
 
         private void LateUpdate()

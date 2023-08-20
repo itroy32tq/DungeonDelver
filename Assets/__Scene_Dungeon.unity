@@ -449,7 +449,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHelth: 1
+  speed: 2
   helth: 1
+  facing: 0
+  timeThinkMin: 1
+  timeThinkMax: 4
+  timeNextDecision: 0
 --- !u!135 &1351832507
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -693,6 +698,7 @@ GameObject:
   - component: {fileID: 1673697123}
   - component: {fileID: 1673697124}
   - component: {fileID: 1673697125}
+  - component: {fileID: 1673697126}
   m_Layer: 0
   m_Name: Dray
   m_TagString: Untagged
@@ -816,11 +822,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f72843f3c1d968d49a9b2312c8209e01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 5
+  attackDuration: 0.25
+  attackDelay: 0.5
   dirHeld: -1
   facing: 1
   mode: 0
+  timeAtkDone: 0
+  timeAtkNext: 0
   rigid: {fileID: 1673697122}
   animator: {fileID: 1673697119}
+  InRm: {fileID: 1673697125}
 --- !u!135 &1673697124
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -846,5 +858,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fb7c7fa2e808b34eb7e05684293574e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keepInRoom: 1
+  keepInRoom: 0
   gridMult: 1
+--- !u!114 &1673697126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1673697118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b4988f66f950d7419f3ab9bacc0f9f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -8,13 +8,11 @@ namespace Delver
     public class Skeletos : Enemy
     {
         [Header("Set in Inspector: Skeletos")]
-        private int speed = 2;
-        private float timeThinkMin = 1f;
-        private float timeThinkMax = 4f;
+        [SerializeField] private float timeThinkMin = 1f;
+        [SerializeField] private float timeThinkMax = 4f;
 
         [Header("Set Dynamically: Skeletos")]
-        private int facing = 0;
-        private float timeNextDecision = 0;
+        [SerializeField] private float timeNextDecision = 0;
 
         private void Update()
         {
